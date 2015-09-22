@@ -29,11 +29,29 @@ Clear your mason cache
 Restart your webserver
 
 # CONFIGURATIONS
-Set($SlackWebhookURL, "slack-hook-url");
+Edit your /opt/rt4/etc/RT_SiteConfig.pm to include:
+    Set($SlackWebhookURL, "slack-hook-url");
+
+#USE
+    my $text; 
+	my $requestor; 
+	my $ticket = $self->TicketObj; 
+	my $queue = $ticket->QueueObj; 
+	my $url = join '', 
+	RT->Config->Get('WebPort') == 443 ? 'https' : 'http', 
+	'://', 
+	RT->Config->Get('WebDomain'), 
+	RT->Config->Get('WebPath'), 
+	'/Ticket/Display.html?id=', 
+	$ticket->Id; 
+ 
+	$requestor = $ticket->RequestorAddresses || 'unknown'; 
+	$text = sprintf('New ticket <%s|#%d> by %s: %s', $url, $ticket->Id, $requestor, $ticket->Subject); 
+
+	RT::Extension::Slack::Notify(text => $text); 
 
 # AUTHORS
-[Maciek] (http://www.gossamer-threads.com/lists/rt/users/128413#128413)
-
+[Maciek] (http://www.gossamer-threads.com/lists/rt/users/128413#128413)  
 Andrew Wippler 
     
 
