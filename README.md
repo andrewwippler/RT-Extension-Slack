@@ -1,24 +1,62 @@
 # RT-Extension-Slack
+Integration with Slack webhooks
+
+# DESCRIPTION
 This module is designed for *Request Tracker 4* integrating with *Slack* webhooks. It was modified from Maciek's original code which was posted on RT's mailing list. His original code is [found here](http://www.gossamer-threads.com/lists/rt/users/128413#128413)
 
-## Installation on Debian/Ubuntu
-    sudo mkdir -p /usr/share/request-tracker4/lib/RT/Extension
-    cd /opt
-    git clone https://github.com/andrewwippler/RT-Extension-Slack.git
-    cd RT-Extension-Slack
-    sudo cp Slack.pm //usr/share/request-tracker4/lib/RT/Extension/Slack.pm
-Edit your **/etc/request-tracker4/RT_SiteConfig.d/50-debconf** to include the following:
+# RT VERSION
+Works with RT 4.2.0
+
+# INSTALLATION
+    perl Makefile.PL
+    make
+    make install
+
+May need root permissions
+
+Edit your /opt/rt4/etc/RT_SiteConfig.pm
+If you are using RT 4.2 or greater, add this line:
+
+	Plugin('RT::Extension::Slack');
+
+For RT 4.0, add this line:
+
+	Set(@Plugins, qw(RT::Extension::Slack));
+
+Clear your mason cache
+		rm -rf /opt/rt4/var/mason_data/obj
+
+Restart your webserver
+
+# CONFIGURATIONS
+Set($SlackWebhookURL, "slack-hook-url");
+
+# AUTHOR
+    [Maciek] (http://www.gossamer-threads.com/lists/rt/users/128413#128413)
+    Andrew Wippler <andrew.wippler@gmail.com>
     
-    Set($SlackWebhookURL, "slack-hook-url");
-Regenerate your **RT_SiteConfig.pm** and restart your webserver
 
-    sudo update-rt-siteconfig
-    sudo systemctl reload apache2.service
-    
-## Usage
-In your scripts, add any overriding code:
+# LICENSE AND COPYRIGHT
+    The MIT License (MIT)
 
-    my $text = "New ticket <http://my-rt.tld/Ticket/Display.html?id=" . $self->TicketObj->Id . "|" . $self->TicketObj->Id . "> from " . $self->TicketObj->RequestorAddresses . ": " . $self->TicketObj->Subject;
-    RT::Extension::Slack::Notify(icon_emoji => ':heavy_exclamation_mark:', text => $text); 
+    Copyright (c) 2015 Andrew Wippler
 
-Defaults can be set by editing **/usr/share/request-tracker4/lib/RT/Extension/Slack.pm**
+    Permission is hereby granted, free of charge, to any person obtaining a
+    copy of this software and associated documentation files (the
+    "Software"), to deal in the Software without restriction, including
+    without limitation the rights to use, copy, modify, merge, publish,
+    distribute, sublicense, and/or sell copies of the Software, and to
+    permit persons to whom the Software is furnished to do so, subject to
+    the following conditions:
+
+    The above copyright notice and this permission notice shall be included
+    in all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+    OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+    MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+    IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+    CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+    TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+    SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+

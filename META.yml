@@ -1,0 +1,28 @@
+---
+abstract: 'RT-Extension-Slack Extension'
+author:
+  - 'Andrew Wippler <andrew.wippler@gmail.com>'
+build_requires:
+  ExtUtils::MakeMaker: 6.59
+configure_requires:
+  ExtUtils::MakeMaker: 6.59
+distribution_type: module
+dynamic_config: 1
+generated_by: 'Module::Install version 1.16'
+license: mit
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: RT-Extension-Slack
+no_index:
+  directory:
+    - inc
+requires:
+  perl: 5.8.3
+resources:
+  license: http://opensource.org/licenses/mit-license.php
+  repository: https://github.com/andrewwippler/RT-Extension-Slack
+version: '0.01'
+x_module_install_rtx_version: '0.37'
+x_requires_rt: 4.0.0
+x_rt_too_new: 4.4.0
