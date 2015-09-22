@@ -33,7 +33,8 @@ Set($SlackWebhookURL, "slack-hook-url");
 
 # AUTHORS
 [Maciek] (http://www.gossamer-threads.com/lists/rt/users/128413#128413)
-Andrew Wippler <andrew.wippler@gmail.com>
+
+Andrew Wippler 
     
 
 # LICENSE AND COPYRIGHT
