@@ -109,21 +109,18 @@ sub Notify {
 	if (!$payload->{text}) { 
 		return; 
 	} 
-	my $payload_json = encode_json($payload); 
+	my $payload_json = JSON::encode_json($payload); 
 
 	$service_webhook = RT->Config->Get('SlackWebhookURL'); 
 	if (!$service_webhook) { 
 		return; 
 	} 
 
-	my $ua = LWP::UserAgent->new; 
+	my $ua = LWP::UserAgent->new(); 
 	$ua->timeout(10); 
 
 	$RT::Logger->info('Pushing notification to Slack: '. $payload_json); 
-	my $r = POST($service_webhook, 
-	[ 'payload' => $payload_json ]); 
-
-	my $response = $ua->request($r); 
+	my $response = $ua->post($service_webhook,[ 'payload' => $payload_json ]);
 	if ($response->is_success) { 
 		return;
 	} else { 
