@@ -31,9 +31,9 @@ Restart your webserver
 # CONFIGURATIONS
 Set($SlackWebhookURL, "slack-hook-url");
 
-# AUTHOR
-    [Maciek] (http://www.gossamer-threads.com/lists/rt/users/128413#128413)
-    Andrew Wippler <andrew.wippler@gmail.com>
+# AUTHORS
+[Maciek] (http://www.gossamer-threads.com/lists/rt/users/128413#128413)
+Andrew Wippler <andrew.wippler@gmail.com>
     
 
 # LICENSE AND COPYRIGHT
