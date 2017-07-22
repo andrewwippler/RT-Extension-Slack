@@ -34,11 +34,11 @@ Edit your /opt/rt4/etc/RT_SiteConfig.pm to include:
 
 # USE THIS IN YOUR SCRIP
 ```
-    my $text; 
-	my $requestor; 
-	my $ticket = $self->TicketObj; 
-	my $queue = $ticket->QueueObj; 
-	my $url = join '', 
+my $text; 
+my $requestor; 
+my $ticket = $self->TicketObj; 
+my $queue = $ticket->QueueObj; 
+my $url = join '', 
 	RT->Config->Get('WebPort') == 443 ? 'https' : 'http', 
 	'://', 
 	RT->Config->Get('WebDomain'), 
@@ -46,10 +46,10 @@ Edit your /opt/rt4/etc/RT_SiteConfig.pm to include:
 	'/Ticket/Display.html?id=', 
 	$ticket->Id; 
  
-	$requestor = $ticket->RequestorAddresses || 'unknown'; 
-	$text = sprintf('New ticket <%s|#%d> by %s: %s', $url, $ticket->Id, $requestor, $ticket->Subject); 
+$requestor = $ticket->RequestorAddresses || 'unknown'; 
+$text = sprintf('New ticket <%s|#%d> by %s: %s', $url, $ticket->Id, $requestor, $ticket->Subject); 
 
-	RT::Extension::Slack::Notify(text => $text); 
+RT::Extension::Slack::Notify(text => $text); 
 ```
 
 # AUTHORS
