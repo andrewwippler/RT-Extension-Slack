@@ -4,8 +4,10 @@ Integration with Slack webhooks
 # DESCRIPTION
 This module is designed for *Request Tracker 4* integrating with *Slack* webhooks. It was modified from Maciek's original code which was posted on RT's mailing list. His original code is [found here](http://www.gossamer-threads.com/lists/rt/users/128413#128413)
 
+The module works with the *Mattermost* server as well.
+
 # RT VERSION
-Works with RT 4.2.0
+Works with RT 4.2.0 and newer
 
 # INSTALLATION
     perl Makefile.PL
