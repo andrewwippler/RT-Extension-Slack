@@ -32,7 +32,8 @@ Restart your webserver
 Edit your /opt/rt4/etc/RT_SiteConfig.pm to include:
     Set($SlackWebhookURL, "slack-hook-url");
 
-#USE
+# USE THIS IN YOUR SCRIP
+```
     my $text; 
 	my $requestor; 
 	my $ticket = $self->TicketObj; 
@@ -49,6 +50,7 @@ Edit your /opt/rt4/etc/RT_SiteConfig.pm to include:
 	$text = sprintf('New ticket <%s|#%d> by %s: %s', $url, $ticket->Id, $requestor, $ticket->Subject); 
 
 	RT::Extension::Slack::Notify(text => $text); 
+```
 
 # AUTHORS
 [Maciek] (http://www.gossamer-threads.com/lists/rt/users/128413#128413)  
