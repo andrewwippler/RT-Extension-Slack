@@ -4,8 +4,10 @@ Integration with Slack webhooks
 # DESCRIPTION
 This module is designed for *Request Tracker 4* integrating with *Slack* webhooks. It was modified from Maciek's original code which was posted on RT's mailing list. His original code is [found here](http://www.gossamer-threads.com/lists/rt/users/128413#128413)
 
+The module works with the *Mattermost* server as well.
+
 # RT VERSION
-Works with RT 4.2.0
+Works with RT 4.2.0 and newer
 
 # INSTALLATION
     perl Makefile.PL
@@ -32,12 +34,16 @@ Restart your webserver
 Edit your /opt/rt4/etc/RT_SiteConfig.pm to include:
     Set($SlackWebhookURL, "slack-hook-url");
 
-#USE
-    my $text; 
-	my $requestor; 
-	my $ticket = $self->TicketObj; 
-	my $queue = $ticket->QueueObj; 
-	my $url = join '', 
+# USAGE
+
+Basic scrip use. Add this code to your scrip.
+
+```
+my $text; 
+my $requestor; 
+my $ticket = $self->TicketObj; 
+my $queue = $ticket->QueueObj; 
+my $url = join '', 
 	RT->Config->Get('WebPort') == 443 ? 'https' : 'http', 
 	'://', 
 	RT->Config->Get('WebDomain'), 
@@ -45,10 +51,17 @@ Edit your /opt/rt4/etc/RT_SiteConfig.pm to include:
 	'/Ticket/Display.html?id=', 
 	$ticket->Id; 
  
-	$requestor = $ticket->RequestorAddresses || 'unknown'; 
-	$text = sprintf('New ticket <%s|#%d> by %s: %s', $url, $ticket->Id, $requestor, $ticket->Subject); 
+$requestor = $ticket->RequestorAddresses || 'unknown'; 
+$text = sprintf('New ticket <%s|#%d> by %s: %s', $url, $ticket->Id, $requestor, $ticket->Subject); 
 
-	RT::Extension::Slack::Notify(text => $text); 
+RT::Extension::Slack::Notify(text => $text); 
+```
+
+The call to ``RT::Extension::Slack::Notify`` takes further args to fill the payload.
+
+```
+RT::Extension::Slack::Notify(text => $text, channel => "support-team", username => "Helpdesk"); 
+```
 
 # AUTHORS
 [Maciek] (http://www.gossamer-threads.com/lists/rt/users/128413#128413)  
