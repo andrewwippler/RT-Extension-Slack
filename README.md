@@ -36,7 +36,12 @@ Edit your /opt/rt4/etc/RT_SiteConfig.pm to include:
 
 # USAGE
 
-Basic scrip use. Add this code to your scrip.
+Basic scrip use. 
+
+Action: User Defined
+
+Add this code to your scrip's "Custom action preparation code":
+
 
 ```
 my $text; 
